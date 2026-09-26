@@ -41,7 +41,7 @@ try:
     ticket = st.text_input('Enter the ticket number:', '12345')
 
     # রেজাল্ট দেখার বাটন
-    if st.button('রেজাল্ট দেখুন'):
+    if st.button('Check'):
         # সারভাইভাল প্রেডিকশন
         user_surv = pd.DataFrame({'Age': [age], 'Fare': [fare]})
         pred_surv = model_surv.predict(user_surv)[0]
