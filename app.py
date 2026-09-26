@@ -5,8 +5,8 @@ from sklearn.preprocessing import LabelEncoder
 
 # ওয়েবসাইটের টাইটেল এবং ডিজাইন
 st.set_page_config(page_title="Titanic AI", page_icon="🚢")
-st.title("🚢 টাইটানিক সারভাইভাল এআই")
-st.write("মেশিন লার্নিং ব্যবহার করে চেক করুন টাইটানিক জাহাজে থাকলে আপনার কী হতো!")
+st.title("Titanic survived and ticket class cheking AI")
+st.write("Ask the AI with 'age' 'fare' 'ticket number'. He can reply servival status and ticket class")
 
 # ডাটা লোড করার ফাংশন (যাতে ওয়েবসাইট ফাস্ট কাজ করে)
 @st.cache_data
@@ -35,10 +35,10 @@ try:
     # --- মডেল ট্রেইনিং শেষ ---
 
     # ইউজারের কাছ থেকে ইনপুট নেওয়া (UI)
-    st.subheader("আপনার তথ্য দিন:")
-    age = st.number_input('আপনার বয়স (Age):', min_value=1, max_value=100, value=20)
-    fare = st.number_input('টিকিটের ভাড়া (Fare - ডলারে):', min_value=0.0, value=8.05)
-    ticket = st.text_input('টিকিট নম্বর (যেমন: A/5 2151):', '12345')
+    st.subheader("Please provide the following information:")
+    age = st.number_input('Enter the passengers age:', min_value=1, max_value=100, value=20)
+    fare = st.number_input('Enter the ticket fare:', min_value=0.0, value=8.05)
+    ticket = st.text_input('Enter the ticket number:', '12345')
 
     # রেজাল্ট দেখার বাটন
     if st.button('রেজাল্ট দেখুন'):
@@ -55,21 +55,21 @@ try:
         pred_class = model_class.predict(user_class)[0]
         
         st.markdown("---")
-        st.subheader("🤖 এআই (AI) এর রেজাল্ট:")
+        st.subheader("The Result:")
         
         # সারভাইভাল রেজাল্ট দেখানো
         if pred_surv == 1:
-            st.success("🟢 রেজাল্ট: এই যাত্রী সম্ভবত বেঁচে ফিরেছিলেন!")
+            st.success("He was rescued alive.")
         else:
-            st.error("🔴 রেজাল্ট: এই যাত্রী সম্ভবত মারা গিয়েছিলেন।")
+            st.error("He was recovered dead.")
             
         # ক্লাস রেজাল্ট দেখানো
         if pred_class == 1:
-            st.info("🥇 টিকিটের ক্লাস: First Class")
+            st.info("First Class Ticket")
         elif pred_class == 2:
-            st.info("🥈 টিকিটের ক্লাস: Second Class")
+            st.info("Second Class Ticket")
         else:
-            st.info("🥉 টিকিটের ক্লাস: Third Class")
+            st.info("Third Class Ticket")
 
 except FileNotFoundError:
     st.error("⚠️ 'train.csv' ফাইলটি পাওয়া যাচ্ছে না! দয়া করে GitHub-এ ডাটাবেস ফাইলটি আপলোড করুন।")
