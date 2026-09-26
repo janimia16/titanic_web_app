@@ -36,8 +36,8 @@ try:
 
     # ইউজারের কাছ থেকে ইনপুট নেওয়া (UI)
     st.subheader("Please provide the following information:")
-    age = st.number_input('Enter the passengers age:', min_value=1, max_value=100, value=1)
-    fare = st.number_input('Enter the ticket fare:', min_value=0.0, value=0)
+    age = st.number_input('Enter the passengers age:', min_value=1, max_value=100)
+    fare = st.number_input('Enter the ticket fare:', min_value=0.0)
     ticket = st.text_input('Enter the ticket number:', 'A/5 21171')
 
     # রেজাল্ট দেখার বাটন
